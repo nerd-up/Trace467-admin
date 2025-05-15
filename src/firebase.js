@@ -1,6 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
-
+import { initializeApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore';
 // Firebase configuration object from your Firebase Console
 const firebaseConfig = {
     apiKey: "AIzaSyDhb0AKr4RfC2pGHZ7JWtUDLhXY1aagkHw",
@@ -11,9 +12,13 @@ const firebaseConfig = {
     appId: "trace467-d4f13"
 };
 
-if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig);
-}
+// if (!firebase.apps.length) {
+//     firebase.initializeApp(firebaseConfig);
+// }
 
-const firestore = firebase.firestore();
-export { firestore };
+// const firestore = firebase.firestore();
+// export { firestore };
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+export { db };
