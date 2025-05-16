@@ -109,8 +109,10 @@ const ManagePosts = () => {
     
             // Fetch reports subcollection for this specific post
             const reportsSnapshot = await getDocs(collection(db, postPath, 'reports'));
+            // console.log(reportsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })),"reportsSnapshot");
             const reports = reportsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-    
+            
+            
             postsData.push({
               postId,
               ...postData,
@@ -142,6 +144,7 @@ const ManagePosts = () => {
     // ];
     useEffect(() => {
         fetchPostsWithReports();
+        console.log(posts,"here are all the posts");
     }, []);
     if (loading) {
         return (
@@ -166,6 +169,7 @@ const ManagePosts = () => {
                         <th style={tableHeaderStyle}>User</th>
                         <th style={tableHeaderStyle}>Post Content</th>
                         <th style={tableHeaderStyle}>Date</th>
+                        {/* <th style={tableHeaderStyle}>Reports</th> */}
                         <th style={tableHeaderStyle}>Actions</th>
                     </tr>
                 </thead>
@@ -184,6 +188,11 @@ const ManagePosts = () => {
                                 )}
                             </td>
                             <td style={tableCellStyle}>{post.time}</td>
+                            {/* <td style={tableCellStyle}>
+                                <ol>
+                                    {post?.reports?.map(report=><li>{report}</li>)}
+                                </ol>
+                            </td> */}
                             <td style={tableCellStyle}>
                                 <button style={actionButtonStyle}>Delete</button>
                                 <button style={actionButtonStyle}>View</button>
